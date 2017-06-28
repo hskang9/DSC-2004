@@ -21,7 +21,8 @@ Here are functions of Numpy:
 data types are used to clarify and separate with in *numpy array*(not built-in array)
 
 (example)
-"""
+
+~~~~
 >>> import numpy as N
 >>> dt = N.dtype([(’id’, ’i4’),
 (’name’, ’S12’), (’scores’, ’u1’, 4)])
@@ -38,4 +39,4 @@ array([[100, 98, 97, 60],
 [100, 100, 85, 98],
 [ 84, 75, 98, 100],
 [ 84, 76, 82, 92], dtype=uint8)
-"""
+~~~~
