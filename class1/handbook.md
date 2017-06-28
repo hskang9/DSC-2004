@@ -12,15 +12,17 @@ There are reasons due to its features:
 
 However, it is packages that separates its use for scientific calculation(numpy, scipy, matplotlib).
 
-## Numpy
-Numpy is the python library used for calculating between separate arrays or matrices with ease.
-Here are functions of Numpy:
+## 2. Numpy
+Numpy is the python library used for calculating between separate arrays or matrices with ease with multiple data types.
+Since most python library for manipulating data uses this library,it is imported in almost every data science projects in python.
+
+Here are features of Numpy:
 
 - **Data type**
 
-data types are used to clarify and separate with in *numpy array*(not built-in array)
+data types are used to clarify and separate in *numpy array*(not built-in array)
 
-(example)
+(example) ** Declaring data type of numpy array, the array can be used similarly as dictionary. **
 
 ~~~~
 >>> import numpy as N
@@ -40,3 +42,35 @@ array([[100, 98, 97, 60],
 [ 84, 75, 98, 100],
 [ 84, 76, 82, 92], dtype=uint8)
 ~~~~
+
+- **Methods and Attributes**
+
+Here are useful functions and attributes in numpy that is used always.
+
+- Attributes(shape of numpy array, data type)
+
+~~~~
+>>> a.shape
+(3,)
+>>> a.dtype
+dtype('int64')
+~~~~
+
+- Methods
+
+** Caculation **
+~~~~
+>>> a = np.array([1,2,3])
+>>> b = np.array([4,5,6])
+>>> a+b
+array([5, 7, 9])
+>>> a-b
+array([-3, -3, -3])
+>>> a*b
+array([ 4, 10, 18])
+>>> a/b
+array([0, 0, 0])
+~~~~
+
+** 
+
