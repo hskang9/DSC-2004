@@ -75,6 +75,7 @@ array([ 4. ,  2.5,  2. ])
 ~~~~
 
 **Type Representation**
+
 As explained above,
 ~~~~
 >>> a.astype(unicode)
@@ -107,11 +108,28 @@ array([[1],
 
 **Data Manipulation**
 
+Filtering
+
 ~~~~
 >>> x = np.arange(9.).reshape(3, 3)
 >>> np.where( x > 5 )
 (array([2, 2, 2]), array([0, 1, 2]))
 >>> x[np.where( x > 3.0 )]               
 array([ 4.,  5.,  6.,  7.,  8.])
+~~~~
+
+Sorting
+
+~~~~
+>>> a = np.array([[1,4],[3,1]])
+>>> np.sort(a)                # sort along the last axis
+array([[1, 4],
+       [1, 3]])
+>>> np.sort(a, axis=None)     # sort the flattened array
+array([1, 1, 3, 4])
+>>> np.sort(a, axis=0)        # sort along the first axis
+array([[1, 1],
+       [3, 4]])
+~~~~
 
 
