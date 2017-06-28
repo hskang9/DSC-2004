@@ -58,7 +58,7 @@ dtype('int64')
 
 - Methods
 
-** Caculation **
+**Calculation**
 ~~~~
 >>> a = np.array([1,2,3])
 >>> b = np.array([4,5,6])
@@ -68,9 +68,49 @@ array([5, 7, 9])
 array([-3, -3, -3])
 >>> a*b
 array([ 4, 10, 18])
->>> a/b
-array([0, 0, 0])
+>>> b/a
+array([4, 2, 2]) 
+>>> b/a.astype(float) # astype() function determines returning type of result
+array([ 4. ,  2.5,  2. ])
 ~~~~
 
-** 
+**Type Representation**
+As explained above,
+~~~~
+>>> a.astype(unicode)
+array([u'1', u'2', u'3'], 
+      dtype='<U21')
+>>> a.astype('double')
+array([ 1.,  2.,  3.])
+~~~~
+
+**Linear Algebra**
+~~~~
+>>> a = np.ones((2,3), np.dtype(int))
+>>> a
+array([[1, 1, 1],
+       [1, 1, 1]])
+>>> a.T # Transpose
+array([[1, 1],
+       [1, 1],
+       [1, 1]])
+ >>> a.reshape(1,6) # reshape
+array([[1, 1, 1, 1, 1, 1]])
+>>> a.reshape(6,1)
+array([[1],
+       [1],
+       [1],
+       [1],
+       [1],
+       [1]])
+~~~~
+
+**Data Manipulation**
+# filtering elements
+>>> np.where([[True, False], [True, True]],
+...          [[1, 2], [3, 4]],
+...          [[9, 8], [7, 6]])
+array([[1, 8],
+       [3, 4]])
+
 
