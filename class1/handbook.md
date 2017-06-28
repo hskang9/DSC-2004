@@ -106,11 +106,12 @@ array([[1],
 ~~~~
 
 **Data Manipulation**
-# filtering elements
->>> np.where([[True, False], [True, True]],
-...          [[1, 2], [3, 4]],
-...          [[9, 8], [7, 6]])
-array([[1, 8],
-       [3, 4]])
+
+~~~~
+>>> x = np.arange(9.).reshape(3, 3)
+>>> np.where( x > 5 )
+(array([2, 2, 2]), array([0, 1, 2]))
+>>> x[np.where( x > 3.0 )]               
+array([ 4.,  5.,  6.,  7.,  8.])
 
 
