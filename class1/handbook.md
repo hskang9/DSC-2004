@@ -239,7 +239,127 @@ dtype: float64
 
 > *all numpy functions are applicable in columns* 
 
+- Reindexing
 
+~~~~
+>>> color=pd.Series(['white','red','yellow','green'],
+... index=[0,2,4,6])
+>>> color
+0     white
+2       red
+4    yellow
+6     green
+>>> color.reindex(range(7))
+0     white
+1       NaN
+2       red
+3       NaN
+4    yellow
+5       NaN
+6     green
+dtype: object
+~~~~
+
+- Summarizing and Describing 
+
+~~~~
+>>> pop
+           CN      JP     KR     UK      US
+2015  1376.05  126.57  50.29  64.72  321.77
+2016  1382.32  126.32  50.50  65.11  324.12
+>>> pop.sum()
+CN    2758.37
+JP     252.89
+KR     100.79
+UK     129.83
+US     645.89
+dtype: float64
+>>> pop.mean()
+CN    1379.185
+JP     126.445
+KR      50.395
+UK      64.915
+US     322.945
+dtype: float64
+>>> pop.cumsum()
+           CN      JP      KR      UK      US
+2015  1376.05  126.57   50.29   64.72  321.77
+2016  2758.37  252.89  100.79  129.83  645.89
+>>> pop.min()
+CN    1376.05
+JP     126.32
+KR      50.29
+UK      64.72
+US     321.77
+dtype: float64
+>>> pop.max()
+CN    1382.32
+JP     126.57
+KR      50.50
+UK      65.11
+US     324.12
+dtype: float64
+>>> pop.median()
+CN    1379.185
+JP     126.445
+KR      50.395
+UK      64.915
+US     322.945
+dtype: float64
+>>> pop.var()
+CN    19.65645
+JP     0.03125
+KR     0.02205
+UK     0.07605
+US     2.76125
+dtype: float64
+>>> pop.std()
+CN    4.433560
+JP    0.176777
+KR    0.148492
+UK    0.275772
+US    1.661701
+dtype: float64
+>>> pop.describe()
+               CN          JP         KR         UK          US
+count     2.00000    2.000000   2.000000   2.000000    2.000000
+mean   1379.18500  126.445000  50.395000  64.915000  322.945000
+std       4.43356    0.176777   0.148492   0.275772    1.661701
+min    1376.05000  126.320000  50.290000  64.720000  321.770000
+25%    1377.61750  126.382500  50.342500  64.817500  322.357500
+50%    1379.18500  126.445000  50.395000  64.915000  322.945000
+75%    1380.75250  126.507500  50.447500  65.012500  323.532500
+max    1382.32000  126.570000  50.500000  65.110000  324.120000
+~~~~
+
+- **Correlation Matrix Of Values** 
+
+Correlations are important to find out the relationship between each columns in data.
+(**This helps to understand relationships from raw data's columns and get a clue for the insight of the data**)
+
+~~~~
+>>> pop.corr()
+     CN   JP   KR   UK   US
+CN  1.0 -1.0  1.0  1.0  1.0
+JP -1.0  1.0 -1.0 -1.0 -1.0
+KR  1.0 -1.0  1.0  1.0  1.0
+UK  1.0 -1.0  1.0  1.0  1.0
+US  1.0 -1.0  1.0  1.0  1.0
+~~~~
+
+- Boolean Indexing
+
+~~~~
+>>> pop < 100
+         CN     JP    KR    UK     US
+2015  False  False  True  True  False
+2016  False  False  True  True  False
+>>> pop[pop < 100] = "yes"
+>>> pop
+           CN      JP   KR   UK      US
+2015  1376.05  126.57  yes  yes  321.77
+2016  1382.32  126.32  yes  yes  324.12
+~~~~
 
 - File IO
 
@@ -247,7 +367,307 @@ dtype: float64
 pd.read_csv({file_path})
 ~~~~
 
+- *Data Handling*
 
+~~~~
+>>> a
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+>>> b
+   A  B  C  D
+0  4  4  4  4
+1  5  5  5  5
+2  6  6  6  6
+3  7  7  7  7
+>>> result = pd.concat([a,b])
+>>> result
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+0  4  4  4  4
+1  5  5  5  5
+2  6  6  6  6
+3  7  7  7  7
+~~~~
 
+Applying keys
+
+~~~~
+>>> a
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+>>> b
+   A  B  C  D
+0  4  4  4  4
+1  5  5  5  5
+2  6  6  6  6
+3  7  7  7  7
+>>> c
+    A   B   C   D
+0   8   8   8   8
+1   9   9   9   9
+2  10  10  10  10
+3  11  11  11  11
+>>> pd.concat([a,b,c],keys=['x','y','z'])
+      A   B   C   D
+x 0   1   1   1   1
+  1   2   2   2   2
+  2   3   3   3   3
+  3   4   4   4   4
+y 0   4   4   4   4
+  1   5   5   5   5
+  2   6   6   6   6
+  3   7   7   7   7
+z 0   8   8   8   8
+  1   9   9   9   9
+  2  10  10  10  10
+  3  11  11  11  11
+~~~~
+
+outer join(join with union keys)
+
+~~~~
+>>> a
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+>>> b = pd.DataFrame({'A': {2:2,3:3,6:6,7:7}, 'B': {2:2,3:3,6:6,7:7}, 'C': {2:2,3:3,6:6,7:7}, 'D': {2:2,3:3,6:6,7:7}}
+>>> b
+   A  B  C  D
+2  2  2  2  2
+3  3  3  3  3
+6  6  6  6  6
+7  7  7  7  7
+>>> d =pd.concat([a,b],axis=1, join='outer')
+>>> d
+     A    B    C    D    A    B    C    D
+0  1.0  1.0  1.0  1.0  NaN  NaN  NaN  NaN
+1  2.0  2.0  2.0  2.0  NaN  NaN  NaN  NaN
+2  3.0  3.0  3.0  3.0  2.0  2.0  2.0  2.0
+3  4.0  4.0  4.0  4.0  3.0  3.0  3.0  3.0
+6  NaN  NaN  NaN  NaN  6.0  6.0  6.0  6.0
+7  NaN  NaN  NaN  NaN  7.0  7.0  7.0  7.0
+~~~~
+
+inner join(join with intersection keys)
+
+~~~~
+>>> a
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+>>> b
+   A  B  C  D
+2  2  2  2  2
+3  3  3  3  3
+6  6  6  6  6
+7  7  7  7  7
+>>> d =pd.concat([a,b],axis=1, join='inner')
+>>> d
+   A  B  C  D  A  B  C  D
+2  3  3  3  3  2  2  2  2
+3  4  4  4  4  3  3  3  3
+~~~~
+
+appending
+
+~~~~
+>>> c
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+>>> b
+   A  B  C  D
+2  2  2  2  2
+3  3  3  3  3
+6  6  6  6  6
+7  7  7  7  7
+>>> c.append(b)
+   A  B  C  D
+0  1  1  1  1
+1  2  2  2  2
+2  3  3  3  3
+3  4  4  4  4
+2  2  2  2  2
+3  3  3  3  3
+6  6  6  6  6
+7  7  7  7  7
+~~~~
+
+Merge with multiple join keys
+
+~~~~
+>>> left
+    A   B key1 key2
+0  A0  B0   K0   K0
+1  A1  B1   K0   K1
+2  A2  B2   K1   K0
+3  A3  B3   K2   K1
+>>> right
+    C   D key1 key2
+0  C0  D0   K0   K0
+1  C1  D1   K1   K0
+2  C2  D2   K1   K0
+3  C3  D3   K2   K0
+>>> result = pd.merge(left,right, on=['key1','key2'])
+>>> result
+    A   B key1 key2   C   D
+0  A0  B0   K0   K0  C0  D0
+1  A2  B2   K1   K0  C1  D1
+2  A2  B2   K1   K0  C2  D2
+~~~~
+
+left outer join
+
+~~~~
+>>> left
+    A   B key1 key2
+0  A0  B0   K0   K0
+1  A1  B1   K0   K1
+2  A2  B2   K1   K0
+3  A3  B3   K2   K1
+>>> right
+    C   D key1 key2
+0  C0  D0   K0   K0
+1  C1  D1   K0   K0
+2  C2  D2   K1   K0
+3  C3  D3   K2   K0
+>>> result = pd.merge(left,right, how='left', on=['key1', 'key2'])
+>>> result
+    A   B key1 key2    C    D
+0  A0  B0   K0   K0   C0   D0
+1  A0  B0   K0   K0   C1   D1
+2  A1  B1   K0   K1  NaN  NaN
+3  A2  B2   K1   K0   C2   D2
+~~~~
+
+Right outer join
+
+~~~~
+>>> left
+    A   B key1 key2
+0  A0  B0   K0   K0
+1  A1  B1   K0   K1
+2  A2  B2   K1   K0
+3  A3  B3   K2   K1
+>>> right
+    C   D key1 key2
+0  C0  D0   K0   K0
+1  C1  D1   K0   K0
+2  C2  D2   K1   K0
+3  C3  D3   K2   K0
+>>> result = pd.merge(left,right, how='right', on=['key1', 'key2'])
+>>> result
+     A    B key1 key2   C   D
+0   A0   B0   K0   K0  C0  D0
+1   A0   B0   K0   K0  C1  D1
+2   A2   B2   K1   K0  C2  D2
+3  NaN  NaN   K2   K0  C3  D3
+~~~~
+
+Inner join
+
+~~~~
+>>> left
+    A   B key1 key2
+0  A0  B0   K0   K0
+1  A1  B1   K0   K1
+2  A2  B2   K1   K0
+3  A3  B3   K2   K1
+>>> right
+    C   D key1 key2
+0  C0  D0   K0   K0
+1  C1  D1   K0   K0
+2  C2  D2   K1   K0
+3  C3  D3   K2   K0
+>>> result = pd.merge(left,right, how='inner', on=['key1', 'key2'])
+>>> result
+    A   B key1 key2   C   D
+0  A0  B0   K0   K0  C0  D0
+1  A0  B0   K0   K0  C1  D1
+2  A2  B2   K1   K0  C2  D2
+~~~~
+
+Outer join
+
+~~~~
+>>> left
+    A   B key1 key2
+0  A0  B0   K0   K0
+1  A1  B1   K0   K1
+2  A2  B2   K1   K0
+3  A3  B3   K2   K1
+>>> right
+    C   D key1 key2
+0  C0  D0   K0   K0
+1  C1  D1   K0   K0
+2  C2  D2   K1   K0
+3  C3  D3   K2   K0
+>>> result = pd.merge(left,right, how='outer', on=['key1', 'key2'])
+>>> result
+     A    B key1 key2    C    D
+0   A0   B0   K0   K0   C0   D0
+1   A0   B0   K0   K0   C1   D1
+2   A1   B1   K0   K1  NaN  NaN
+3   A2   B2   K1   K0   C2   D2
+4   A3   B3   K2   K1  NaN  NaN
+5  NaN  NaN   K2   K0   C3   D3
+~~~~
+
+Joining on index
+
+~~~~
+>>> left 
+     A   B
+K0  A0  B0
+K1  A1  B1
+K2  A2  B2
+>>> right
+     C   D
+K0  C0  D0
+K2  C2  D2
+K3  C3  D3
+>>> result = left.join(right, how='inner')
+>>> result
+     A   B   C   D
+K0  A0  B0  C0  D0
+K2  A2  B2  C2  D2
+~~~~
+
+~~~~
+>>> left 
+     A   B
+K0  A0  B0
+K1  A1  B1
+K2  A2  B2
+>>> right
+     C   D
+K0  C0  D0
+K2  C2  D2
+K3  C3  D3
+>>> result = left.join(right, how='outer')
+>>> result
+      A    B    C    D
+K0   A0   B0   C0   D0
+K1   A1   B1  NaN  NaN
+K2   A2   B2   C2   D2
+K3  NaN  NaN   C3   D3
+~~~~
+
+# 3. Matplotlib
 
 
