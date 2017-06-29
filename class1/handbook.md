@@ -142,7 +142,7 @@ Pandas is an open source, BSD-licensed library providing high-performance, easy-
 
 it uses a special object which is called 'DataFrame' to process data. 
 DataFrames are similar to python dictionary, but they are different in structures and features.
-They use 'name' as key, and stores value which corresponds to it regardless of data type(even dictionary), and a set of name and data is called as a column.
+They use 'name' as key, and stores value which corresponds to it regardless of data type(even dictionary), and a set of name and data is called as a 'column'.
 Also, they have functions which manipulates the content.
 
 DataFrames are also integrates with numpy, so numpy functions or calculation can be applied to them.
@@ -219,7 +219,7 @@ df[{new column name}] = {new values}
 Name: a, dtype: float64
 ~~~~
 
-- Calculation(Same as numpy.ndarray)
+- Calculation(Same as numpy)
 
 ~~~~
 >>> df['a']/ df['b']
@@ -235,6 +235,8 @@ Name: a, dtype: float64
 9    1.272616
 dtype: float64
 ~~~~
+
+### *all numpy functions are applicable in columns* 
 
 
 
