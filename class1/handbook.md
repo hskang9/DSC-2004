@@ -134,3 +134,100 @@ array([[1, 1],
 
 ## 3. Scipy
 Scipy is scientific computing library in python. 
+Although it has a lot of features, we focus on data science so I will only talk about pandas.
+
+### **Pandas**
+
+Pandas is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the Python programming language.
+
+it uses a special object which is called 'DataFrame' to process data. 
+DataFrames are similar to python dictionary, but they are different in structures and features.
+They use 'name' as key, and stores value which corresponds to it regardless of data type(even dictionary), and a set of name and data is called as a column.
+Also, they have functions which manipulates the content.
+
+DataFrames are also integrates with numpy, so numpy functions or calculation can be applied to them.
+
+- Initialization
+
+~~~~
+>>> df = pd.DataFrame(np.random.randn(10,5), columns=['a','b','c','d','e'])
+>>> df
+          a         b         c         d         e
+0 -1.331539  1.958928  0.795523 -0.012123 -0.663218
+1  0.930204 -2.687991  0.166150  0.285672  0.391856
+2 -1.449307  1.083694 -0.547790 -0.414167 -2.354428
+3 -0.142876 -0.454380 -1.214627  2.218012 -1.009829
+4  0.567735 -1.305605 -0.793925  0.312255  2.142604
+5 -0.374101 -0.644294  0.433977  0.362608 -0.243922
+6 -0.794533  0.735908 -1.296882  0.152835  2.356051
+7  0.754404 -1.214098  0.231807 -0.069859 -0.402979
+8 -0.483729 -2.367157  0.112239  1.431582 -1.622971
+9  0.822402  0.646229  1.384360  0.322538 -2.048547
+
+"""
+Initializing dictionary as value
+"""
+
+>>> pop_data = {'KR': {2015:50.29, 2016:50.50},
+ 'US': {2015:321.77, 2016:324.12},
+ 'CN': {2015:1376.05, 2016:1382.32},
+ 'JP': {2015:126.57, 2016:126.32},
+ 'UK': {2015:64.72, 2016:65.11}}
+>>> pop = pd.DataFrame(pop_data)
+
+>>> pop
+           CN      JP     KR     UK      US
+2015  1376.05  126.57  50.29  64.72  321.77
+2016  1382.32  126.32  50.50  65.11  324.12
+
+~~~~
+
+- Adding column
+
+
+- Cropping column
+
+~~~~
+>>> df['a']
+0   -1.331539
+1    0.930204
+2   -1.449307
+3   -0.142876
+4    0.567735
+5   -0.374101
+6   -0.794533
+7    0.754404
+8   -0.483729
+9    0.822402
+Name: a, dtype: float64
+~~~~
+
+- Calculation(Same as numpy.ndarray)
+
+~~~~
+>>> df['a']/ df['b']
+0   -0.679728
+1   -0.346059
+2   -1.337377
+3    0.314442
+4   -0.434844
+5    0.580638
+6   -1.079663
+7   -0.621370
+8    0.204350
+9    1.272616
+dtype: float64
+~~~~
+
+
+
+- File IO
+
+~~~~
+pd.read_csv({file_path})
+~~~~
+
+
+
+
+
