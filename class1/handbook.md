@@ -132,4 +132,5 @@ array([[1, 1],
        [3, 4]])
 ~~~~
 
-
+## 3. Scipy
+Scipy is scientific computing library in python. 
