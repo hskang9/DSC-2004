@@ -236,8 +236,9 @@ Name: a, dtype: float64
 dtype: float64
 ~~~~
 
+"""
 ### *all numpy functions are applicable in columns* 
-
+"""
 
 
 - File IO
