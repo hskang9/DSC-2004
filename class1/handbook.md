@@ -759,6 +759,7 @@ Array
 >>> axarr[1].scatter(x, y)
 <matplotlib.collections.PathCollection object at 0x1169ca650>
 >>> plt.show()
+~~~~
 
 
 ![Subplots](https://s3.ap-northeast-2.amazonaws.com/videosforlandingpage0525/subplots1.png)
