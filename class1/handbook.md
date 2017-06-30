@@ -735,7 +735,7 @@ Tuple
 """
 >>> x = np.linspace(0, 2 * np.pi, 400)
 >>> y = np.sin(x * 2)
->>> f, **(ax1, ax2)** = plt.subplots(1, 2, sharey=True)
+>>> f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
 >>> ax1.plot(x, y)
 [<matplotlib.lines.Line2D object at 0x1169db410>]
 >>> ax1.set_title('Sharing Y axis')
@@ -751,12 +751,12 @@ Array
 """
 >>> x = np.linspace(0, 2 * np.pi, 400)
 >>> y = np.sin(x * 2)
->>> f, **axarr** = plt.subplots(1, 2, sharey=True)
->>> **axarr[0]**.plot(x, y)
+>>> f, axarr = plt.subplots(1, 2, sharey=True)
+>>> axarr[0].plot(x, y)
 [<matplotlib.lines.Line2D object at 0x1169db410>]
->>> **axarr[0]**.set_title('Sharing Y axis')
+>>> axarr[0].set_title('Sharing Y axis')
 <matplotlib.text.Text object at 0x11d311850>
->>> **axarr[1]**.scatter(x, y)
+>>> axarr[1].scatter(x, y)
 <matplotlib.collections.PathCollection object at 0x1169ca650>
 >>> plt.show()
 ~~~~
