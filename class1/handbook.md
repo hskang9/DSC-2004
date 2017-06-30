@@ -670,4 +670,103 @@ K3  NaN  NaN   C3   D3
 
 # 3. Matplotlib
 
+Matplotlib is used to plot collected datas in python. 
+
+Basic plot
+
+~~~~
+>>> ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
+>>> ts = ts.cumsum()
+>>> ts.plot()
+<matplotlib.axes._subplots.AxesSubplot object at 0x11b43d2d0>
+>>> plt.show(ts)
+~~~~
+
+![Basic plot](https://s3.ap-northeast-2.amazonaws.com/videosforlandingpage0525/basic_plot.png)
+
+Multiple Plot
+
+~~~~
+>>> df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index, columns=list('ABCD'))
+>>> df = df.cumsum()
+>>> df.plot()
+>>> plt.show()
+~~~~
+
+![Multiple Plot](https://s3.ap-northeast-2.amazonaws.com/videosforlandingpage0525/multiple_plot.png)
+
+Other kinds of plot can be made:
+
+Pie chart
+~~~~
+>>> labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+>>> sizes = [15, 30, 45, 10]
+>>> explode = (0, 0.1, 0, 0)
+>>> plt.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+([<matplotlib.patches.Wedge object at 0x1169fdd10>, <matplotlib.patches.Wedge object at 0x11cc8c110>, <matplotlib.patches.Wedge object at 0x11cc99410>, <matplotlib.patches.Wedge object at 0x11cca6710>], [<matplotlib.text.Text object at 0x116a0d7d0>, <matplotlib.text.Text object at 0x11cc8cb50>, <matplotlib.text.Text object at 0x11cc99e50>, <matplotlib.text.Text object at 0x11ccb3190>], [<matplotlib.text.Text object at 0x116a0dc90>, <matplotlib.text.Text object at 0x11cc8cf90>, <matplotlib.text.Text object at 0x11cca62d0>, <matplotlib.text.Text object at 0x11ccb35d0>])
+>>> plt.show()
+~~~~
+
+![Pie chart](https://s3.ap-northeast-2.amazonaws.com/videosforlandingpage0525/Piechart.png)
+
+Box plot
+
+~~~~
+>>> spread = np.random.rand(50) * 100
+>>> center = np.ones(25) * 50
+>>> flier_high = np.random.rand(10) * 100 + 100
+>>> flier_low = np.random.rand(10) * -100
+>>> data = np.concatenate((spread, center, flier_high, flier_low), 0)
+>>> plt.boxplot(data)
+~~~~
+
+![Box plot](https://s3.ap-northeast-2.amazonaws.com/videosforlandingpage0525/boxplot.png)
+
+
+Subplot
+
+Subplots can be added using subplot() function
+f, axarr = plt.subplot({row},{column},sharex={True or False}, sharey={True or False})
+ShareX or shareY : share given axis value between subplots
+
+~~~~
+"""
+Tuple
+"""
+>>> x = np.linspace(0, 2 * np.pi, 400)
+>>> y = np.sin(x * 2)
+>>> f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
+>>> ax1.plot(x, y)
+[<matplotlib.lines.Line2D object at 0x1169db410>]
+>>> ax1.set_title('Sharing Y axis')
+<matplotlib.text.Text object at 0x11d311850>
+>>> ax2.scatter(x, y)
+<matplotlib.collections.PathCollection object at 0x1169ca650>
+>>> plt.show()
+~~~~
+
+~~~~
+"""
+Array
+"""
+>>> x = np.linspace(0, 2 * np.pi, 400)
+>>> y = np.sin(x * 2)
+>>> f, axarr = plt.subplots(1, 2, sharey=True)
+>>> axarr[0].plot(x, y)
+[<matplotlib.lines.Line2D object at 0x1169db410>]
+>>> axarr[0].set_title('Sharing Y axis')
+<matplotlib.text.Text object at 0x11d311850>
+>>> axarr[1].scatter(x, y)
+<matplotlib.collections.PathCollection object at 0x1169ca650>
+>>> plt.show()
+
+
+![Subplots](https://s3.ap-northeast-2.amazonaws.com/videosforlandingpage0525/subplots1.png)
+
+
+
+
+
+
+
 
