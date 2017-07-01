@@ -828,13 +828,15 @@ Array
 # And there is a part which python shines in the field of data science....
 
 
-# **Machine Learning**
+## **Machine Learning**
 
-## Python is the dominant programming language for creating data products/AI.
+**Python** is the dominant programming language for creating data products/AI.
 
 ![Python rocks in AI/ML](https://www.ibm.com/developerworks/community/blogs/jfp/resource/BLOGS_UPLOADED_IMAGES/trends0.png)
 
 
-Neural network
+[Frameworks for ML/AI](https://github.com/vinta/awesome-python#deep-learning)
+
+
 
 
