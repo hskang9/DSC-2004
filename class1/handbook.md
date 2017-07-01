@@ -1,5 +1,61 @@
 # Handbook
-## 1. Why is Python used for Data science?
+# {Concept}
+{explanation}
+
+---
+# **Python**
+
+## data type
+built-in data types are dict, list, set (which along with frozenset, replaces the deprecated sets module), and tuple
+Dict has keys and values. List and tuple stores data with index, but set does not store them in order or have index.
+
+## Class
+Class is important in Object Oriented Programming(OOP). Python can make class with properties and methods. Inheritance and polymorphism can be applied.
+
+## Lambda
+lambda functions(anonymous functions), generates inline functions which does not require declarations using def ~:.
+common cases which utilizes them are: 
+
+map()
+~~~~
+def multiply(x):
+    return (x*x)
+def add(x):
+    return (x+x)
+
+funcs = [multiply, add]
+for i in range(5):
+    value = list(map(lambda x: x(i), funcs))
+    print(value)
+
+# Output:
+# [0, 0]
+# [1, 2]
+# [4, 4]
+# [9, 6]
+# [16, 8]
+~~~~
+
+filter()
+~~~~
+number_list = range(-5, 5)
+less_than_zero = list(filter(lambda x: x < 0, number_list))
+print(less_than_zero)
+
+# Output: [-5, -4, -3, -2, -1]
+~~~~
+
+reduce()
+~~~~
+from functools import reduce
+product = reduce((lambda x, y: x * y), [1, 2, 3, 4])
+
+# Output: 24
+~~~~
+
+lambda functions help developers understand code better with less lines of code.
+
+#  Why is Python used for Data science?
 
 Compared to R, python is more focused on general purposes such as web app(django), prototype of native app(pyQt), hardware mockup(GPIO).
 Then why is python is used for data science?
@@ -12,7 +68,7 @@ There are reasons due to its features:
 
 However, it is packages that separates its use for scientific calculation(numpy, scipy, matplotlib).
 
-## 2. Numpy
+##  Numpy
 Numpy is the python library used for calculating between separate arrays or matrices with ease with multiple data types.
 Since most python library for manipulating data uses this library,it is imported in almost every data science projects in python.
 
@@ -132,7 +188,7 @@ array([[1, 1],
        [3, 4]])
 ~~~~
 
-## 3. Scipy
+## Scipy
 Scipy is scientific computing library in python. 
 Although it has a lot of features, we focus on data science so I will only talk about pandas.
 
@@ -668,7 +724,7 @@ K2   A2   B2   C2   D2
 K3  NaN  NaN   C3   D3
 ~~~~
 
-# 3. Matplotlib
+# Matplotlib
 
 Matplotlib is used to plot collected datas in python. 
 
@@ -769,5 +825,16 @@ Array
 
 
 
+# And there is a part which python shines in the field of data science....
+
+
+# **Machine Learning**
+
+## Python is the dominant programming language for creating data products/AI.
+
+![Python rocks in AI/ML](https://www.ibm.com/developerworks/community/blogs/jfp/resource/BLOGS_UPLOADED_IMAGES/trends0.png)
+
+
+Neural network
 
 
